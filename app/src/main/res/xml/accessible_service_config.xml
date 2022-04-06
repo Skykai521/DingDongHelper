@@ -6,5 +6,5 @@
     android:accessibilityFeedbackType="feedbackAllMask"
     android:packageNames="com.yaya.zone"
     android:notificationTimeout="10"
-    android:accessibilityFlags="flagDefault"
+    android:accessibilityFlags="flagDefault|flagRetrieveInteractiveWindows|flagIncludeNotImportantViews"
     android:canRetrieveWindowContent="true"/>
