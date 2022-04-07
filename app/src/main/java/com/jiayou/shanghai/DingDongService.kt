@@ -25,7 +25,7 @@ class DingDongService : AccessibilityService() {
                 HOME_ACTIVITY -> {
                     jumpToCartActivity(event)
                 }
-                CHOOSE_DELIVERY_TIME -> {
+                CHOOSE_DELIVERY_TIME, CHOOSE_DELIVERY_TIME_V2 -> {
                     chooseDeliveryTime(event)
                 }
                 GX0 -> {
@@ -48,7 +48,7 @@ class DingDongService : AccessibilityService() {
         if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
         currentClassName = event.className as String
         Log.d(TAG, "currentClassName: $currentClassName")
-        if (currentClassName in listOf(CART_ACTIVITY, CHOOSE_DELIVERY_TIME)) {
+        if (currentClassName in listOf(CART_ACTIVITY, CHOOSE_DELIVERY_TIME, CHOOSE_DELIVERY_TIME_V2)) {
             enableJumpCart = true
         }
         if (currentClassName == HOME_ACTIVITY) {
@@ -99,7 +99,7 @@ class DingDongService : AccessibilityService() {
             performGlobalAction(GLOBAL_ACTION_BACK)
             GlobalScope.launch {
                 delay(100)
-                if (currentClassName == CHOOSE_DELIVERY_TIME) {
+                if (currentClassName in listOf(CHOOSE_DELIVERY_TIME, CHOOSE_DELIVERY_TIME_V2)) {
                     performGlobalAction(GLOBAL_ACTION_BACK)
                 }
             }
@@ -143,5 +143,6 @@ class DingDongService : AccessibilityService() {
         const val GX0 = "gx0"
         const val RETURN_CART_DIALOG = "by"
         const val XN1 = "xn1"
+        const val CHOOSE_DELIVERY_TIME_V2 = "iy"
     }
 }
